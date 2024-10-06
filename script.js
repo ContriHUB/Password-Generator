@@ -94,6 +94,20 @@ async function copyContent() {
 
 }
 
+document.querySelector('[data-copy]').addEventListener('click', function() {
+    const copyBtn = this;
+    const copyIcon = copyBtn.querySelector('.copy-icon');
+    const checkboxIcon = copyBtn.querySelector('.checkbox-icon');
+
+    copyIcon.style.display = 'none';
+    checkboxIcon.style.display = 'block';
+
+    setTimeout(function() {
+        copyIcon.style.display = 'block';
+        checkboxIcon.style.display = 'none';
+    }, 2000);
+});
+
 function shufflePassword(array) {
     //Fisher Yates Method
     for (let i = array.length - 1; i > 0; i--) {
