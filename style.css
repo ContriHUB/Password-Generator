@@ -258,6 +258,7 @@ h1 {
     width: 20%;
     border-radius: 20px;
     background-color: red;
+}
 
 .copyBtn {
     position: relative;
@@ -265,15 +266,48 @@ h1 {
     border: none;
     cursor: pointer;
     padding: 10px;
-    transition: transform 0.2s ease; 
+    transition: transform 0.2s ease; /* Smooth click effect */
+}
+
+.copyBtn:active {
+    transform: scale(0.95); /* Adds a click effect */
 }
 
 .icon {
-    transition: all 0.3s ease; 
+    transition: all 0.3s ease; /* Smooth transition for icon change */
     width: 23px;
     height: 23px;
 }
 
 .success {
-    filter: hue-rotate(100deg); 
+    filter: hue-rotate(100deg); /* For green success checkmark */
+}
+
+
+.tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: none;
+}
+
+
+.copyMsg {
+    display: none; 
+}
+
+.active {
+
+    display: block; /* Show the message when active */
+    background-color: #fff;
+    color: black;
+    font-size: medium;
+    transition: opacity 0.5s; /* Optional: Add a fade effect */
+    opacity: 1; /* Ensure it is fully visible */
 }
