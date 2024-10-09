@@ -230,72 +230,44 @@ lowercaseCheck.addEventListener('change',()=>calcStrength());
 numbersCheck.addEventListener('change',()=>calcStrength());
 symbolsCheck.addEventListener('change',()=>calcStrength());
 
+const copyIcon = copyBtn.querySelector('.icon')
 
-async function copyContent() {
-    const copyIcon = copyBtn.querySelector('.icon');
-    try {
-        await navigator.clipboard.writeText(passwordDisplay.value);
-        copyMsg.innerText = "copied";
-    }
-    catch(e) {
-        copyMsg.innerText = "Failed";
-    }
-    copyIcon.src ="https://img.icons8.com/ios-filled/50/40C057/checked-checkbox.png";
-    copyIcon.classList.add('success');
-    copyMsg.classList.add("active");
-
-    setTimeout( () => {
-        copyIcon.src = 'copy.svg'; 
-        copyMsg.classList.remove("active");
-    },2000);
-
-}
-document.addEventListener("DOMContentLoaded", function () {
-    const copyBtn = document.querySelector('[data-copy]');
-    const passwordDisplay = document.querySelector('input[data-passwordDisplay]');
-    const copyIcon = copyBtn.querySelector('.copy-icon');
-    const checkboxIcon = copyBtn.querySelector('.checkbox-icon');
-    const tooltip = copyBtn.querySelector('#tooltip');
-    const copyMsg = document.getElementById('copyMsg');
-
-    const updateCopyButtonState = () => {
-        copyBtn.disabled = !passwordDisplay.value.trim();
-    };
-
+    // Generate password logic
     const generatePassword = () => {
-        passwordDisplay.value = "YourGeneratedPassword"; // Generate your password logic here
-        updateCopyButtonState();
+        passwordDisplay.value = "YourGeneratedPassword"; // Replace with actual password generation logic
+        // updateCopyButtonState();  // Enable copy button after generating password
     };
 
-    const handleCopy = () => {
-        const passwordToCopy = passwordDisplay.value.trim();
-        if (!passwordToCopy) return;
+    // Copy password to clipboard and show feedback
+    async function copyContent() {
+        const passwordToCopy = passwordDisplay.value.trim(); // Get the trimmed password
+        if (!passwordToCopy) return; // Don't proceed if there's no password
 
-        navigator.clipboard.writeText(passwordToCopy).then(() => {
-            copyIcon.style.display = 'none';
-            checkboxIcon.style.display = 'inline-block';
-            tooltip.classList.add('active');
-            copyMsg.innerText = "Copied";
-        }).catch(() => {
-            copyMsg.innerText = "Failed";
-        }).finally(() => {
-            setTimeout(() => {
-                copyIcon.style.display = 'inline-block';
-                checkboxIcon.style.display = 'none';
-                tooltip.classList.remove('active');
-                copyMsg.classList.add("active");
-                setTimeout(() => copyMsg.classList.remove("active"), 2000);
-            }, 2000);
-        });
-    };
+        try {
+            await navigator.clipboard.writeText(passwordToCopy); // Copy to clipboard
+           
+        } catch (e) {
+            copyMsg.innerText = "Failed"; // Show failure message
+        }
+        copyMsg.innerText = "Copied"; // Show copied message
+        copyIcon.src = "https://img.icons8.com/ios-filled/50/40C057/checked-checkbox.png"; // Change icon to checked state
+        copyIcon.classList.add('success'); // Add success class
+        copyMsg.classList.add("active"); // Show the copy message
 
-    passwordDisplay.addEventListener('input', updateCopyButtonState);
-    document.getElementById('generateButton')?.addEventListener('click', generatePassword);
-    copyBtn.addEventListener('click', handleCopy);
+        // Set a timeout to reset the icon and message after 2 seconds
+        setTimeout(() => {
+            copyIcon.src = 'copy.svg'; // Reset icon to original
+            copyIcon.classList.remove('success'); // Remove success class
+            copyMsg.classList.remove("active"); // Hide the copy message
+        }, 2000); // 2-second delay
+    }
 
-    updateCopyButtonState();
-});
+    // Event Listeners
+    // passwordDisplay.addEventListener('input', updateCopyButtonState);  // For updating copy button state
+    document.getElementById('generateButton')?.addEventListener('click', generatePassword);  // Password generation
+    copyBtn.addEventListener('click', copyContent);  // Copy event
 
+    // updateCopyButtonState();  // Initial state update
 
 
 function shufflePassword(array) {
@@ -411,3 +383,4 @@ generateBtn.addEventListener('click', () => {
     //calculate strength
     calcStrength();
 });
+
