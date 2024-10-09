@@ -232,6 +232,7 @@ symbolsCheck.addEventListener('change',()=>calcStrength());
 
 
 async function copyContent() {
+    const copyIcon = copyBtn.querySelector('.icon');
     try {
         await navigator.clipboard.writeText(passwordDisplay.value);
         copyMsg.innerText = "copied";
@@ -239,10 +240,12 @@ async function copyContent() {
     catch(e) {
         copyMsg.innerText = "Failed";
     }
-    //to make copy wala span visible
+    copyIcon.src ="https://img.icons8.com/ios-filled/50/40C057/checked-checkbox.png";
+    copyIcon.classList.add('success');
     copyMsg.classList.add("active");
 
     setTimeout( () => {
+        copyIcon.src = 'copy.svg'; 
         copyMsg.classList.remove("active");
     },2000);
 

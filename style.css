@@ -258,4 +258,22 @@ h1 {
     width: 20%;
     border-radius: 20px;
     background-color: red;
+
+.copyBtn {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s ease; 
+}
+
+.icon {
+    transition: all 0.3s ease; 
+    width: 23px;
+    height: 23px;
+}
+
+.success {
+    filter: hue-rotate(100deg); 
 }
